@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -13,11 +14,18 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        Button inputBtn = (Button) findViewById(R.id.go_to_first_btn);
-        inputBtn.setOnClickListener(onClickListener);
+        Intent intent = getIntent();
+
+        String inputValue = intent.getStringExtra("input_value");
+
+        TextView textView = (TextView) findViewById(R.id.scd_act_tv);
+        textView.setText(inputValue);
+
+        Button gotoBtn = (Button) findViewById(R.id.go_to_first_btn);
+        gotoBtn.setOnClickListener(onClickListener);
     }
 
-    public void openFirstActivity(){
+    public void openSecondActivity(){
         Intent intent = new Intent(this, FirstActivity.class);
         startActivity(intent);
     }
@@ -25,7 +33,7 @@ public class SecondActivity extends AppCompatActivity {
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            openFirstActivity();
+            openSecondActivity();
         }
     };
 }
