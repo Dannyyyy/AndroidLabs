@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">AndroidLabs</string>
     <string name="go_to_second_activity">Go to second activity</string>
-    <string name="initial_message">"Hello World, Android!"</string>
+    <string name="initial_message">"Input text</string>
     <string name="go_to_first_activity">Go to first activity</string>
+    <string name="title_first_activity">FIRST ACTIVITY</string>
+    <string name="title_second_activity">SECOND ACTIVITY</string>
 </resources>

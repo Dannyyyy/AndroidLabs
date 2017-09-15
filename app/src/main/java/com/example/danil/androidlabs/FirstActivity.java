@@ -16,22 +16,36 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-        Button gotoBtn = (Button) findViewById(R.id.go_to_second_btn);
+        Intent intent = getIntent();
+
+        String inputValue = intent.getStringExtra("second_activity_input_value");
+
+        Button gotoBtn = (Button) findViewById(R.id.go_to_second_activity_btn);
         gotoBtn.setOnClickListener(onClickListener);
 
-        editText = (EditText) findViewById(R.id.fst_act_et);
+        editText = (EditText) findViewById(R.id.first_activity_edit_text);
+        if(inputValue != null) {
+            editText.setText(inputValue);
+        }
     }
 
-    public void openSecondActivity(){
+    @Override
+    public void onBackPressed() {
+        gotoSecondActivity();
+
+        super.onBackPressed();
+    }
+
+    public void gotoSecondActivity(){
         Intent intent = new Intent(this, SecondActivity.class);
-        intent.putExtra("input_value", editText.getText().toString());
+        intent.putExtra("first_activity_input_value", editText.getText().toString());
         startActivity(intent);
     }
 
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            openSecondActivity();
+            gotoSecondActivity();
         }
     };
 }
