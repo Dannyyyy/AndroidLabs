@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class FirstActivity extends AppCompatActivity {
 
     private EditText editText;
+    private final int firstActivityRequestCode = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +30,10 @@ public class FirstActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        gotoSecondActivity();
-
-        super.onBackPressed();
-    }
-
     public void gotoSecondActivity(){
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra("first_activity_input_value", editText.getText().toString());
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -48,4 +42,15 @@ public class FirstActivity extends AppCompatActivity {
             gotoSecondActivity();
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if(resultCode == RESULT_OK && requestCode == firstActivityRequestCode){
+            String inputValue = intent.getStringExtra("second_activity_input_value");
+            editText = (EditText) findViewById(R.id.first_activity_edit_text);
+            if(inputValue != null) {
+                editText.setText(inputValue);
+            }
+        }
+    }
 }

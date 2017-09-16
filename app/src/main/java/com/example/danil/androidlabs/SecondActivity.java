@@ -35,9 +35,10 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void gotoFirstActivity(){
-        Intent intent = new Intent(this, FirstActivity.class);
+        Intent intent = new Intent();
         intent.putExtra("second_activity_input_value", editText.getText().toString());
-        startActivity(intent);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private final View.OnClickListener onClickListener = new View.OnClickListener() {
